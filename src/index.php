@@ -5,6 +5,9 @@
 
 <body>
     <header>
-        Our Page
+        My Header
     </header>
+    <ul>
+        <li><a href="inventory/inventory_log.php">Inventory</a></li>
+    </ul>
 </body>

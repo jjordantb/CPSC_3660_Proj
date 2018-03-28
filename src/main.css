@@ -1,3 +1,19 @@
-.header {
+header {
     text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+li {
+    display: block;
+    width: 100px;
+    height: 40px;
+    background-color: #aaaaaa;
+    text-align: center;
+    line-height: 100%;
 }
