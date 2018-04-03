@@ -24,7 +24,7 @@ class db_query {
     }
 
     public function is_connected() {
-        return $this->connection->connect_error;
+        return !$this->connection->connect_error;
     }
 
     /**

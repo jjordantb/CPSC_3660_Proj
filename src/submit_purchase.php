@@ -19,4 +19,4 @@ if (!$con->is_connected()) {
 }
 
 $qry = $con->execute_query("SELECT * FROM Test_Customer;");
-print $qry->fetch_array();
+print_r($qry->fetch_array());
