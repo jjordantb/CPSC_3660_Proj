@@ -16,8 +16,21 @@
     <h1>Summary</h1>
 </div>
 <div class="contents">
-    <div class="inventory-table">
+    <?php
+    require_once ("../db_query.php");
 
-    </div>
+    $count = 0;
+    $con = new db_query();
+    if (!$con->is_connected()) {
+        die("Connection Failed: " . $con->connection->connect_error);
+    }
+
+    $qry = $con->execute_query("SELECT * FROM BoughtVehicle;");
+
+    while ($row = $qry->fetch_array()) {
+        $count++;
+    }
+    ?>
+    <p>Vehicles in Stock: <?php echo $count ?></p>
 </div>
 </body>

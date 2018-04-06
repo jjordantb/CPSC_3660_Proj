@@ -10,7 +10,7 @@ if (sizeof($_GET) > 0) {
         die("Connection Failed: " . $con->connection->connect_error);
     }
 
-    $qry = $con->execute_query("SELECT * FROM BoughtVehicle WHERE VechicleID=" . $_GET['id'] . ";");
+    $qry = $con->execute_query("SELECT * FROM BoughtVehicle WHERE VehicleID=" . $_GET['id'] . ";");
     if ($row = $qry->fetch_array()) {
         $id = $row[0];
     }

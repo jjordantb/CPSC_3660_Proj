@@ -60,6 +60,6 @@
         ?>
     </table>
     <br>
-    <button type="button">Add Vehicle</button>
+    <button onclick="location.href='add_vehicle.php'" type="button">Add Vehicle</button>
 </div>
 </body>
