@@ -2,7 +2,7 @@
 
 $success = false;
 
-if (sizeof($_GET) > 0) {
+if (sizeof($_GET) > 0 && !empty($_GET['location'])) {
     $success = true;
     require_once ("../db_query.php");
 
@@ -38,6 +38,16 @@ if (sizeof($_GET) > 0) {
         . $purchase_id . ","
         . $repair_id
         . ");");
+
+    $size = sizeof($_GET);
+    for ($i = 0; $i < $size - 14; $i++) {
+        $rep_str = $_GET["repair_string_" . strval($i)];
+        $rep_cost = $_GET["cost_string_" . strval($i)];
+        $repair_id = rand(0, 999999999);
+        $qry3 = $con->execute_update("INSERT INTO Repairs VALUES ("
+            . $repair_id . "," . "'" . $rep_str . "'," . $rep_cost . ",NULL," . $veh_id .
+            ");");
+    }
 }
 
 ?>
@@ -46,6 +56,38 @@ if (sizeof($_GET) > 0) {
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="../main.css">
     <title>WSA - Add Vehicles</title>
+
+    <script language="JavaScript">
+        var count = 0;
+
+        function addRow() {
+            var element = document.createElement("input");
+            var label = document.createElement("Label");
+            label.innerHTML = "Repair: ";
+            element.setAttribute("type", "text");
+            element.setAttribute("value", "");
+            element.setAttribute("name", "repair_string_" + count);
+            element.setAttribute("style", "width:200px");
+            label.setAttribute("style", "font-weight:normal");
+
+            var cost = document.createElement("input");
+            cost.setAttribute("type", "text");
+            cost.setAttribute("value", "");
+            cost.setAttribute("name", "cost_string_" + count);
+            cost.setAttribute("style", "width:100px");
+            var costLabel = document.createElement("Label");
+            costLabel.innerHTML = " Cost: ";
+            costLabel.setAttribute("style", "font-weight:normal");
+
+            var repairs = document.getElementById("repairs");
+            repairs.appendChild(label);
+            repairs.appendChild(element);
+            repairs.appendChild(costLabel);
+            repairs.appendChild(cost);
+            repairs.appendChild(document.createElement("br"))
+            count++;
+        }
+    </script>
 </head>
 
 <body>
@@ -93,7 +135,11 @@ if (sizeof($_GET) > 0) {
         <input type="text" name="book_price"><br>
         Price Paid<br>
         <input type="text" name="price_paid"><br>
-        <br>
+        <div id="repairs">
+            <br>
+        </div>
+        <button type="button" id="button" value="add_row" onclick="addRow();">Add Repair</button>
+        <br><br>
         <input type="submit" value="Submit">
     </form>
 </div>
