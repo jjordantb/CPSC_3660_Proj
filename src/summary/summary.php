@@ -16,9 +16,8 @@
     <h1>Summary</h1>
 </div>
 <div class="contents">
-    <p>Vehicles in Stock</p>
-    <p>Customers #</p>
-    <p>Active Warranties</p>
-    <p>Vehicles sold</p>
+    <div class="inventory-table">
+
+    </div>
 </div>
 </body>

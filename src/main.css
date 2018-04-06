@@ -13,8 +13,52 @@ h1 {
     color: white;
 }
 
+h2 {
+    font-family: Roboto, sans-serif;
+    color: white;
+}
+
 body {
     background-color: #222;
+    max-width: 1250px;
+    margin: 0 auto;
+}
+
+table {
+    background-color: #272727;
+    width: 75%;
+    border-collapse: collapse;
+}
+
+tr:nth-child(even) {
+    background-color: #353535;
+}
+
+tr.table-heading {
+    padding: 0;
+    color: white;
+    background-color: #4C984C;
+}
+
+th a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+th a {
+    color: white;
+    text-decoration: none;
+}
+
+tr:hover {
+    background-color: grey;
+}
+
+th.table-heading {
+    color: white;
+    background-color: #4C984C;
+    height: 40px;
 }
 
 ul {

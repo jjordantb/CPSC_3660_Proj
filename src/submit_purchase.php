@@ -13,10 +13,13 @@ $username = "remote";
 $password = "Mongoose12!";
 $dbname = "WESTWADB";
 
-$con = new db_query($servername, $username, $password, $dbname);
+$con = new db_query();
 if (!$con->is_connected()) {
     die("Connection Failed: " . $con->connection->connect_error);
 }
 
-$qry = $con->execute_query("SELECT * FROM Test_Customer;");
-print_r($qry->fetch_array());
+$qry = $con->execute_query("SELECT * FROM BoughtVehicle;");
+
+while ($row = $qry->fetch_array()) {
+    print_r($row);
+}

@@ -12,15 +12,9 @@ class db_query {
 
     /**
      * db_query constructor.
-     * @param $username
-     * @param $password
-     * @param $dbname
-     * @param $servername
      */
-    public function __construct($servername, $username, $password, $dbname) {
-        print "Creating Connection";
-        $this->connection = new mysqli($servername, $username, $password, $dbname);
-        print "Created Connection? " . $this->connection->ping();
+    public function __construct() {
+        $this->connection = new mysqli("cs3660.paratek.io", "remote", "Mongoose12!", "WESTWADB");
     }
 
     public function is_connected() {
