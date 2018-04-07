@@ -40,7 +40,7 @@ if (sizeof($_GET) > 0 && !empty($_GET['location'])) {
         . ");");
 
     $size = sizeof($_GET);
-    for ($i = 0; $i < $size - 14; $i++) {
+    for ($i = 0; $i < $size - 13; $i++) {
         $rep_str = $_GET["repair_string_" . strval($i)];
         $rep_cost = $_GET["cost_string_" . strval($i)];
         $repair_id = rand(0, 999999999);
