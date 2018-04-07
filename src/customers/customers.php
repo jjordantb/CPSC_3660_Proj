@@ -1,7 +1,26 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Jordan
- * Date: 4/5/2018
- * Time: 10:28 AM
- */
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    <title>WSA - Customers</title>
+</head>
+
+<body>
+<div class="toolbar">
+    <ul>
+        <li class="tool-bar-title"><a href="../index.php">Navigation</a></li>
+        <li class="menu-item"><a href="../summary/summary.php">Summary</a></li>
+        <li class="menu-item"><a href="../inventory/inventory.php">Vehicle Inventory</a></li>
+        <li class="menu-item"><a href="../customers/customers.php">Customer Registry</a></li>
+        <li class="menu-item"><a href="">Warranty Registry</a></li>
+    </ul>
+    <div class="user-logout">
+        <p>User: John</p>
+    </div>
+</div>
+<div class="main-title">
+    <h1>Customers</h1>
+</div>
+<div class="contents">
+
+</div>
+</body>

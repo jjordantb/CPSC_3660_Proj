@@ -90,7 +90,6 @@ if (sizeof($_GET) > 0 && !empty($_GET['location'])) {
     </script>
 </head>
 
-<body>
 <div class="toolbar">
     <ul>
         <li class="tool-bar-title"><a href="../index.php">Navigation</a></li>
@@ -116,7 +115,8 @@ if (sizeof($_GET) > 0 && !empty($_GET['location'])) {
         Location<br>
         <input type="text" name="location"><br>
         Aution(Y/N)<br>
-        <input type="text" name="auction"><br>
+        <input type="radio" name="auction" value="Y"> Yes<br>
+        <input type="radio" name="auction" value="N"> No<br>
         Seller<br>
         <input type="text" name="seller"><br>
         Make<br>

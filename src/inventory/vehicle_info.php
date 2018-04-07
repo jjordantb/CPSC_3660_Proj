@@ -10,7 +10,6 @@ if (sizeof($_GET) > 0) {
         die("Connection Failed: " . $con->connection->connect_error);
     }
 
-
     $qry = $con->execute_query("SELECT * FROM BoughtVehicle WHERE VehicleID=" . $_GET['id'] . ";");
     if ($row = $qry->fetch_array()) {
         $id = $row[0];
@@ -54,21 +53,21 @@ if (sizeof($_GET) > 0) {
         }
 
         $date = date('Y', strtotime($row[3]));
-        print "<p>Summary for Vehicle $id</p>";
-        print "<p>Make: $row[1]</p>";
-        print "<p>Model: $row[2]</p>";
-        print "<p>Year: $date</p>";
-        print "<p>Car Condition: $row[4]</p>";
-        print "<p>Miles: $row[5]</p>";
-        print "<p>Book Price: $row[6]</p>";
-        print "<p>Price Paid: $row[7]</p>";
+        echo "<p>Summary for Vehicle $id</p>";
+        echo "<p>Make: $row[1]</p>";
+        echo "<p>Model: $row[2]</p>";
+        echo "<p>Year: $date</p>";
+        echo "<p>Car Condition: $row[4]</p>";
+        echo "<p>Miles: $row[5]</p>";
+        echo "<p>Book Price: $row[6]</p>";
+        echo "<p>Price Paid: $row[7]</p>";
         # purchase / warenty record links
     } else {
         print "<p>Vehicle $id</p>";
     }
     print "<br>";
     ?>
-    -- Repairs --
+    <p>-- Repairs --</p>
 
     <table align="center">
         <tr class="table-heading">
