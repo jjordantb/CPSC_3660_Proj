@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Kevin Okada
- * Date: 4/7/2018
- * Time: 5:15 PM
+ * User: Kevin
+ * Date: 4/8/2018
+ * Time: 1:31 AM
  */
 require_once ("../db_query.php");
 
@@ -13,13 +13,13 @@ if (!$con->is_connected()) {
     die("Connection Failed: " . $con->connection->connect_error);
 }
 
-$EmployeeID = rand(0, 999999999);
-$qry = $con->execute_query("INSERT INTO Employee VALUES ("
-    . "$EmployeeID,"
-    . "'{$_GET['FirstName']}',"
-    . "'{$_GET['LastName']}',"
-    . "'{$_GET['Phone']}',"
-    . "'{$_GET['Commission']}');"
+$SaleID = rand(0, 999999999);
+$qry = $con->execute_query("INSERT INTO Sale VALUES ("
+    . "$SaleID,"
+    . "'{$_GET['Date']}',"
+    . "'{$_GET['TotalDue']}',"
+    . "'{$_GET['DownPayment']}',"
+    . "'{$_GET['FinanceAmount']}');"
 );
 
 if ($qry) {
@@ -29,7 +29,7 @@ if ($qry) {
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="../main.css">
-    <title>WSA - Add Employee</title>
+    <title>WSA - Add Sale</title>
 </head>
 
 <div class="toolbar">
@@ -51,26 +51,21 @@ if ($qry) {
 <div class="contents">
     <?php
     if ($success) {
-        echo "Employee Added";
+        echo "Sale Added";
     }
     ?>
-    <form action="add_employee.php">
-        First Name<br>
-        <input type="text" name="FirstName"><br>
-        Last Name<br>
-        <input type="text" name="LastName"><br>
-        Phone<br>
-        <input type="text" name="Phone"><br>
-        Commission<br>
-        <input type="text" name="Commission"><br>
+    <form action="add_Sale.php">
+        Date of Birth (YYYY-MM-DD)<br>
+        <input type="text" name="Date"><br>
+        Total Due<br>
+        <input type="text" name="TotalDue"><br>
+        Down Payment<br>
+        <input type="text" name="DownPayment"><br>
+        Finance Amount<br>
+        <input type="text" name="FinanceAmount"><br>
         <br>
         <input type="submit" value="Submit">
     </form>
 </div>
 </body>
-}
-if (!function_exists('mysqli_init') && !extension_loaded('mysqli')) {
-    echo 'We don\'t have mysqli!!!';
-} else {
-    echo 'Phew we have it!';
 }
