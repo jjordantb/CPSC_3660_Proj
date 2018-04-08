@@ -45,7 +45,14 @@ if (sizeof($_GET) > 0) {
         $custQry = $con->execute_query("SELECT * FROM Customer WHERE CustomerID=$id;");
         if ($custQry->num_rows == 1) {
             $customerRow = $custQry->fetch_array();
-            print "Customer {$customerRow['FirstName']} {$customerRow['LastName']} ID: {$customerRow['CustomerID']}";
+            print "{$customerRow['FirstName']} {$customerRow['LastName']} ID: {$customerRow['CustomerID']}";
+            print "<br>Gender: {$customerRow['Gender']}";
+            print "<br>DOB: {$customerRow['DateOfBirth']}";
+            print "<br>TaxID: {$customerRow['TaxId']}";
+            print "<br>Address: {$customerRow['Address']}";
+            print "<br>Zip: {$customerRow['Zip']}";
+            print "<br>State: {$customerRow['State']}";
+            print "<br>Number of Late Payments: {$customerRow['LatePayments']}";
             print "<br>";
         }
 
@@ -54,29 +61,32 @@ if (sizeof($_GET) > 0) {
     }
     print "<br>";
     ?>
-<!--    <p>-- Repairs --</p>-->
-<!---->
-<!--    <table align="center">-->
-<!--        <tr class="table-heading">-->
-<!--            <th class="table-heading">RepairID</th>-->
-<!--            <th class="table-heading">Problem</th>-->
-<!--            <th class="table-heading">Estimated Cost</th>-->
-<!--            <th class="table-heading">Actual Cost</th>-->
-<!--        </tr>-->
-<!--        --><?php
-//        $repairQry = $con->execute_query("SELECT * FROM Repairs, CarPurchase WHERE Repairs.VehicleID=CarPurchase.VehicleID" .
-//            " AND Repairs.VehicleID=$id;");
-//        while($repRow = $repairQry->fetch_array()) {
-//            $cost = $repRow['ActualCost'];
-//            $repID = $repRow['RepairID'];
-//            print "<tr>";
-//            print "<th><a href=\"../repairs/repair.php?id=$repID&vehicleID=$id\" >" . $repRow['RepairID'] . "</a></th>";
-//            print "<th><a href=\"../repairs/repair.php?id=$repID&vehicleID=$id\" >" . $repRow['Problem'] . "</a></th>";
-//            print "<th><a href=\"../repairs/repair.php?id=$repID&vehicleID=$id\" >" . $repRow['Est_RepairCost'] . "</a></th>";
-//            print "<th><a href=\"../repairs/repair.php?id=$repID&vehicleID=$id\" >" . (strlen($cost) == 0 ? "Incomplete" : $cost) . "</a></th>";
-//            print "<tr>";
-//        }
-//        ?>
-<!--    </table>-->
+    <p>-- Owned Vehicles --</p>
+
+    <table align="center">
+        <tr class="table-heading">
+            <th class="table-heading">SaleID</th>
+            <th class="table-heading">Date</th>
+            <th class="table-heading">Total</th>
+            <th class="table-heading">EmployeeID</th>
+            <th class="table-heading">VehicleID</th>
+        </tr>
+        <?php
+        $repairQry = $con->execute_query(
+                "SELECT * FROM Sale AS s, Customer AS c 
+                        WHERE s.CustomerID=c.CustomerID"
+        );
+        while($repRow = $repairQry->fetch_array()) {
+            $veh_id = $repRow['VehicleID'];
+            print "<tr>";
+            print "<th><a>" . $repRow['SaleID'] . "</a></th>"; // TODO: Click to Sale information
+            print "<th><a>" . $repRow['Date'] . "</a></th>";
+            print "<th><a>" . $repRow['TotalDue'] . "</a></th>";
+            print "<th><a>" . $repRow['EmployeeID'] . "</a></th>"; // TODO: Click for employee information
+            print "<th><a href=\"../inventory/vehicle_info.php?id=$veh_id\" >" . $repRow['VehicleID'] . "</a></th>";
+            print "<tr>";
+        }
+        ?>
+    </table>
 </div>
 </body>
