@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Kevin Okada
- * Date: 4/7/2018
- * Time: 5:15 PM
+ * User: Azeruel
+ * Date: 4/8/2018
+ * Time: 11:27 AM
  */
 require_once ("../db_query.php");
 
@@ -13,23 +13,17 @@ if (!$con->is_connected()) {
     die("Connection Failed: " . $con->connection->connect_error);
 }
 
-$EmployeeID = rand(0, 999999999);
-$qry = $con->execute_query("INSERT INTO Employee VALUES ("
-    . "$EmployeeID,"
-    . "'{$_GET['FirstName']}',"
-    . "'{$_GET['LastName']}',"
-    . "'{$_GET['Phone']}',"
-//    . "'{$_GET['Commission']}');"
-);
-
+$qry = $con->execute_query("UPDATE Employee SET Commission = '{$_GET['Commission']}' WHERE EmployeeID = '{$_GET['EmployeeID']}'");
 if ($qry) {
     $success = true;
 }
+
 ?>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="../main.css">
-    <title>WSA - Add Employee</title>
+    <title>WSA - Update Commission</title>
 </head>
 
 <div class="toolbar">
@@ -46,24 +40,20 @@ if ($qry) {
     </div>
 </div>
 <div class="main-title">
-    <h1>Add Employee</h1>
+    <h1>Add Commission</h1>
 </div>
 <div class="contents">
     <?php
     if ($success) {
-        echo "Employee Added";
+        echo "Added Commission";
     }
     ?>
-    <form action="add_employee.php">
-        First Name<br>
-        <input type="text" name="FirstName"><br>
-        Last Name<br>
-        <input type="text" name="LastName"><br>
-        Phone<br>
-        <input type="text" name="Phone"><br>
-       <!--Commission<br>
-       <input type="text" name="Commission"><br>
-       <br>-->
+    <form action="add_commission.php">
+        Employee ID<br>
+        <input type="text" name="EmployeeID"><br>
+        Commission<br>
+        <input type="text" name="Commission"><br>
+        <br>
         <input type="submit" value="Submit">
     </form>
 </div>
