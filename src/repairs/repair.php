@@ -46,7 +46,7 @@ if (sizeof($_GET) > 0) {
             <li class="menu-item"><a href="../summary/summary.php">Summary</a></li>
             <li class="menu-item"><a href="../inventory/inventory.php">Vehicle Inventory</a></li>
             <li class="menu-item"><a href="../customers/customers.php">Customer Registry</a></li>
-            <li class="menu-item"><a href="">Warranty Registry</a></li>
+            <li class="menu-item"><a href="../warranty/warranties.php">Warranty Registry</a></li>
         </ul>
         <div class="user-logout">
             <p>User: John</p>
