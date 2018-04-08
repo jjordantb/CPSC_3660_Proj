@@ -30,7 +30,7 @@ if (sizeof($_GET) > 0) {
         <li class="menu-item"><a href="../summary/summary.php">Summary</a></li>
         <li class="menu-item"><a href="../inventory/inventory.php">Vehicle Inventory</a></li>
         <li class="menu-item"><a href="../customers/customers.php">Customer Registry</a></li>
-        <li class="menu-item"><a href="">Warranty Registry</a></li>
+        <li class="menu-item"><a href="../warranty/warranties.php">Warranty Registry</a></li>
     </ul>
     <div class="user-logout">
         <p>User: John</p>
@@ -87,6 +87,31 @@ if (sizeof($_GET) > 0) {
             print "<th><a href=\"../repairs/repair.php?id=$repID&vehicleID=$id\" >" . $repRow['Problem'] . "</a></th>";
             print "<th><a href=\"../repairs/repair.php?id=$repID&vehicleID=$id\" >" . $repRow['Est_RepairCost'] . "</a></th>";
             print "<th><a href=\"../repairs/repair.php?id=$repID&vehicleID=$id\" >" . (strlen($cost) == 0 ? "Incomplete" : $cost) . "</a></th>";
+            print "<tr>";
+        }
+        ?>
+    </table>
+
+    <p>-- Warranties --</p>
+
+    <table align="center">
+        <tr class="table-heading">
+            <th class="table-heading">WarrantyID</th>
+            <th class="table-heading">Start Date</th>
+            <th class="table-heading">Length</th>
+            <th class="table-heading">Cost</th>
+            <th class="table-heading">Deductible</th>
+        </tr>
+        <?php
+        $repairQry = $con->execute_query("SELECT * FROM Warranties WHERE VehicleID=$id;");
+        while($repRow = $repairQry->fetch_array()) {
+            $war_id = $repRow['WarrantyID'];
+            print "<tr>";
+            print "<th><a href=\"../warranty/warranty_info.php?id=$war_id\" >" . $repRow['WarrantyID'] . "</a></th>";
+            print "<th><a href=\"../warranty/warranty_info.php?id=$war_id\" >" . $repRow['StartDate'] . "</a></th>";
+            print "<th><a href=\"../warranty/warranty_info.php?id=$war_id\" >" . $repRow['Length'] . "</a></th>";
+            print "<th><a href=\"../warranty/warranty_info.php?id=$war_id\" >" . $repRow['Cost'] . "</a></th>";
+            print "<th><a href=\"../warranty/warranty_info.php?id=$war_id\" >" . $repRow['Deductible'] . "</a></th>";
             print "<tr>";
         }
         ?>

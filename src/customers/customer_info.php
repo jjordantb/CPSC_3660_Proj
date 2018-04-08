@@ -30,7 +30,7 @@ if (sizeof($_GET) > 0) {
         <li class="menu-item"><a href="../summary/summary.php">Summary</a></li>
         <li class="menu-item"><a href="../inventory/inventory.php">Vehicle Inventory</a></li>
         <li class="menu-item"><a href="../customers/customers.php">Customer Registry</a></li>
-        <li class="menu-item"><a href="">Warranty Registry</a></li>
+        <li class="menu-item"><a href="../warranty/warranties.php">Warranty Registry</a></li>
     </ul>
     <div class="user-logout">
         <p>User: John</p>
@@ -78,11 +78,13 @@ if (sizeof($_GET) > 0) {
         );
         while($repRow = $repairQry->fetch_array()) {
             $veh_id = $repRow['VehicleID'];
+            $emp_id = $repRow['EmployeeID'];
+            $sale_id = $repRow['SaleID'];
             print "<tr>";
-            print "<th><a>" . $repRow['SaleID'] . "</a></th>"; // TODO: Click to Sale information
+            print "<th><a href=\"../sales/sale_info.php?id=$sale_id\">" . $repRow['SaleID'] . "</a></th>";
             print "<th><a>" . $repRow['Date'] . "</a></th>";
             print "<th><a>" . $repRow['TotalDue'] . "</a></th>";
-            print "<th><a>" . $repRow['EmployeeID'] . "</a></th>"; // TODO: Click for employee information
+            print "<th><a href=\"../employee/employee_info.php?id=$emp_id\">" . $repRow['EmployeeID'] . "</a></th>";
             print "<th><a href=\"../inventory/vehicle_info.php?id=$veh_id\" >" . $repRow['VehicleID'] . "</a></th>";
             print "<tr>";
         }
