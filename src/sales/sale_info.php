@@ -71,7 +71,7 @@ if (sizeof($_GET) > 0) {
             <th class="table-heading">Deductible</th>
         </tr>
         <?php
-        $qry = $con->execute_query("SELECT * FROM Warranties;");
+        $qry = $con->execute_query("SELECT * FROM Warranties WHERE SaleID={$customerRow['SaleID']};");
         while ($row = $qry->fetch_array()) {
             print "<tr>";
             print "<th><a>" . $row['WarrantyID'] . "</a></th>";
