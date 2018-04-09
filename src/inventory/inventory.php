@@ -45,7 +45,7 @@
                 die("Connection Failed: " . $con->connection->connect_error);
             }
 
-            $qry = $con->execute_query("SELECT * FROM BoughtVehicle;");
+            $qry = $con->execute_query("SELECT * FROM Vehicle;");
 
             while ($row = $qry->fetch_array()) {
                 $date = date('Y', strtotime($row[3]));

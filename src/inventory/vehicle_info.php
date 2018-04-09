@@ -10,7 +10,7 @@ if (sizeof($_GET) > 0) {
         die("Connection Failed: " . $con->connection->connect_error);
     }
 
-    $qry = $con->execute_query("SELECT * FROM BoughtVehicle WHERE VehicleID=" . $_GET['id'] . ";");
+    $qry = $con->execute_query("SELECT * FROM Vehicle WHERE VehicleID=" . $_GET['id'] . ";");
     if ($row = $qry->fetch_array()) {
         $id = $row[0];
     }
@@ -42,8 +42,8 @@ if (sizeof($_GET) > 0) {
 <div class="contents">
     <?php
     if ($id != "Not Found") {
-        $purchaseQry = $con->execute_query("SELECT * FROM CarPurchase, BoughtVehicle WHERE CarPurchase.VehicleID" .
-            "=BoughtVehicle.VehicleID AND CarPurchase.VehicleID=" . $id . ";");
+        $purchaseQry = $con->execute_query("SELECT * FROM CarPurchase, Vehicle WHERE CarPurchase.VehicleID" .
+            "=Vehicle.VehicleID AND CarPurchase.VehicleID=" . $id . ";");
         if ($purchaseQry->num_rows == 1) {
             $purRow = $purchaseQry->fetch_array();
             print "Vehicle " . ($purRow['Auction'] == "Y" ? "was" : "wasn't") . " purchased at auction. "

@@ -26,7 +26,7 @@ if (sizeof($_GET) > 0 && !empty($_GET['location'])) {
             "'" . $_GET['seller'] . "'" . "," .
             $veh_id . ");");
 
-    $qry2 = $con->execute_update("INSERT INTO BoughtVehicle VALUES ("
+    $qry2 = $con->execute_update("INSERT INTO Vehicle VALUES ("
         . $veh_id . ","
         . "'" . $_GET['make'] . "'" . ","
         . "'" . $_GET['model'] . "'" . ","
