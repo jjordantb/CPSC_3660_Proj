@@ -53,7 +53,8 @@ if (sizeof($_GET) > 0) {
             print "<br>Address: {$customerRow['Address']}";
             print "<br>Zip: {$customerRow['Zip']}";
             print "<br>State: {$customerRow['State']}";
-            print "<br>Number of Late Payments: {$customerRow['LatePayments']}";
+            //TODO: START HERE calculate the number of late payments, add a make payment form, and calculate average payment time
+            print "<br>Number of Late Payments: ";
             print "<br>";
         }
 
@@ -88,6 +89,31 @@ if (sizeof($_GET) > 0) {
             print "<th><a>" . $repRow['TotalDue'] . "</a></th>";
             print "<th><a>" . $repRow['EmployeeID'] . "</a></th>";
             print "<th><a href=\"../inventory/vehicle_info.php?id=$veh_id\" >" . $repRow['VehicleID'] . "</a></th>";
+            print "<tr>";
+        }
+        ?>
+    </table>
+    <br>
+    <button onclick="location.href='../sales/add_sale.php?customer_id=<?php echo $_GET['id'] ?>'" type="button">Purchase Vehicle</button>
+    <br>
+
+    <p>-- Payment History --</p>
+
+    <table align="center">
+        <tr class="table-heading">
+            <th class="table-heading">Required Date</th>
+            <th class="table-heading">Actual Date</th>
+            <th class="table-heading">Amount</th>
+        </tr>
+        <?php
+        $repairQry = $con->execute_query(
+            "SELECT * FROM Payments WHERE CustomerID IN (SELECT CustomerID FROM Sale WHERE Sale.CustomerID={$customerRow['CustomerID']});"
+        );
+        while($repRow = $repairQry->fetch_array()) {
+            print "<tr>";
+            print "<th><a>" . $repRow['PmtDate'] . "</a></th>";
+            print "<th><a>" . $repRow['PaidDate'] . "</a></th>";
+            print "<th><a>" . $repRow['Amount'] . "</a></th>";
             print "<tr>";
         }
         ?>

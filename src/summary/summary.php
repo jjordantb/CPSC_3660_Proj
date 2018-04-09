@@ -31,12 +31,14 @@
         die("Connection Failed: " . $con->connection->connect_error);
     }
 
-    $qry = $con->execute_query("SELECT * FROM BoughtVehicle;");
+    $qry = $con->execute_query("SELECT * FROM Vehicle;");
 
     while ($row = $qry->fetch_array()) {
         $count++;
     }
     ?>
     <p>Vehicles in Stock: <?php echo $count ?></p>
+    <br>
+    <p>We can add other statistic here, like profit and what not, but there isn't a point at the moment</p>
 </div>
 </body>
