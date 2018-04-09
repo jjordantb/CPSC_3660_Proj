@@ -10,7 +10,6 @@ if (sizeof($_GET) > 0 && key_exists('date', $_GET)) {
         die("Connection Failed: " . $con->connection->connect_error);
     }
 
-    # Redirected from update repair
     $curDate = DateTime::createFromFormat('Y-m-d', date("Y-m-d"));
     $actDate = DateTime::createFromFormat('Y-m-d', $_GET['date']);
     $dif = $curDate->diff($actDate)->format("%a");
