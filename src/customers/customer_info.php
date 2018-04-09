@@ -53,8 +53,18 @@ if (sizeof($_GET) > 0) {
             print "<br>Address: {$customerRow['Address']}";
             print "<br>Zip: {$customerRow['Zip']}";
             print "<br>State: {$customerRow['State']}";
-            //TODO: START HERE calculate the number of late payments, add a make payment form, and calculate average payment time
-            print "<br>Number of Late Payments: ";
+            print "<br>Number of Late Payments: {$customerRow['LatePayments']}";
+            $paymentQuery = $con->execute_query("SELECT PmtDate, PaidDate, Amount FROM Payments WHERE CustomerID=$id;");
+            $total = 0;
+            $count = 0;
+            while ($pymtRow = $paymentQuery->fetch_array()) {
+                $count++;
+                $pmtDate = DateTime::createFromFormat('Y-m-d', $pymtRow['PmtDate']);
+                $actDate = DateTime::createFromFormat('Y-m-d', $pymtRow['PaidDate']);
+                $dif = $actDate->diff($pmtDate)->format("%a");
+                $total+=((int)$dif);
+            }
+            print "<br>Average Payment Time(Days): " . ($count == 0 ? "0" : ($total / $count));
             print "<br>";
         }
 
@@ -119,6 +129,6 @@ if (sizeof($_GET) > 0) {
         ?>
     </table>
     <br>
-    <button onclick="location.href='../sales/add_sale.php?customer_id=<?php echo $_GET['id'] ?>'" type="button">Purchase Vehicle</button>
+    <button onclick="location.href='../sales/add_payment.php?customer_id=<?php echo $_GET['id'] ?>'" type="button">Make Payment</button>
 </div>
 </body>
