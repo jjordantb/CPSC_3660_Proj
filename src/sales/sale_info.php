@@ -51,9 +51,9 @@ if (sizeof($_GET) > 0) {
             print "<br>Total Due: {$customerRow['TotalDue']}";
             print "<br>Down Payment: {$customerRow['DownPayment']}";
             print "<br>Finance Amount: {$customerRow['FinanceAmount']}";
-            print "<br>Customer: <a href='../customers/customer_info.php?{$customerRow['CustomerID']}'>{$customerRow['CustomerID']}</a>";
+            print "<br>Customer: <a href='../customers/customer_info.php?id={$customerRow['CustomerID']}'>{$customerRow['CustomerID']}</a>";
             print "<br>Employee ID: {$customerRow['EmployeeID']}";
-            print "<br>Vehicle: <a href='../inventory/vehicle_info.php?{$customerRow['VehicleID']}'>{$customerRow['VehicleID']}</a>";
+            print "<br>Vehicle: <a href='../inventory/vehicle_info.php?id={$customerRow['VehicleID']}'>{$customerRow['VehicleID']}</a>";
         }
     } else {
         print "<p>Sale $id</p>";
