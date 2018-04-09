@@ -8,19 +8,23 @@
 require_once ("../db_query.php");
 
 $success = false;
-if (count($_GET) > 0) {
+if (count($_GET) > 0 && key_exists('Cost', $_GET)) {
     $con = new db_query();
     if (!$con->is_connected()) {
         die("Connection Failed: " . $con->connection->connect_error);
     }
 
-    $EmployeeID = rand(0, 999999999);
-    $qry = $con->execute_query("INSERT INTO Employee VALUES ("
-        . "'{$_GET['FirstName']}',"
-        . "'{$_GET['LastName']}',"
-        . "'{$_GET['Phone']}',"
-        . "0,"
-        . "$EmployeeID);"
+    $war_id = rand(0, 999999999);
+    $qry = $con->execute_query("INSERT INTO Warranties VALUES ("
+        . "'{$_GET['ItemsCovered']}',"
+        . "'" . date("Y-m-d") . "',"
+        . "{$_GET['Cost']},"
+        . "{$_GET['Length']},"
+        . "{$_GET['Deductible']},"
+        . "{$_GET['EmployeeID']},"
+        . "{$_GET['SaleID']},"
+        . "$war_id,"
+        . "{$_GET['VehicleID']});"
     );
 
     if ($qry) {
@@ -31,7 +35,7 @@ if (count($_GET) > 0) {
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="../main.css">
-    <title>WSA - Add Employee</title>
+    <title>WSA - Add Warranty</title>
 </head>
 
 <div class="toolbar">
@@ -53,19 +57,21 @@ if (count($_GET) > 0) {
 <div class="contents">
     <?php
     if ($success) {
-        echo "Employee Added";
+        echo "Warranty Added";
     }
     ?>
-    <form action="add_employee.php">
-        First Name<br>
-        <input type="text" name="FirstName"><br>
-        Last Name<br>
-        <input type="text" name="LastName"><br>
-        Phone<br>
-        <input type="text" name="Phone"><br>
-       <!--Commission<br>
-       <input type="text" name="Commission"><br>
-       <br>-->
+    <form action="add_warranty.php">
+        Items Covered<br>
+        <input type="text" name="ItemsCovered"><br>
+        Cost<br>
+        <input type="text" name="Cost"><br>
+        Length<br>
+        <input type="text" name="Length"><br>
+        Deductible<br>
+        <input type="text" name="Deductible"><br>
+        <input type="hidden" name="EmployeeID" value="<?php echo $_GET['emp_id'] ?>">
+        <input type="hidden" name="SaleID" value="<?php echo $_GET['sale_id'] ?>">
+        <input type="hidden" name="VehicleID" value="<?php echo $_GET['veh_id'] ?>">
         <input type="submit" value="Submit">
     </form>
 </div>

@@ -2,7 +2,7 @@
 require_once ("../db_query.php");
 
 $success = false;
-if (key_exists('first_name', $_GET) && sizeof($_GET['first_name']) > 0) {
+if (key_exists('first_name', $_GET)) {
 
     $con = new db_query();
     if (!$con->is_connected()) {
@@ -42,6 +42,7 @@ if (key_exists('first_name', $_GET) && sizeof($_GET['first_name']) > 0) {
         <li class="menu-item"><a href="../summary/summary.php">Summary</a></li>
         <li class="menu-item"><a href="../inventory/inventory.php">Vehicle Inventory</a></li>
         <li class="menu-item"><a href="../customers/customers.php">Customer Registry</a></li>
+        <li class="menu-item"><a href="../employee/employees.php">Employee</a></li>
         <li class="menu-item"><a href="../warranty/warranties.php">Warranty Registry</a></li>
     </ul>
     <div class="user-logout">
@@ -49,7 +50,7 @@ if (key_exists('first_name', $_GET) && sizeof($_GET['first_name']) > 0) {
     </div>
 </div>
 <div class="main-title">
-    <h1>Add Vehicles</h1>
+    <h1>Add Customer</h1>
 </div>
 <div class="contents">
     <?php

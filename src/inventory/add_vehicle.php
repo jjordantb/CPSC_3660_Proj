@@ -36,11 +36,11 @@ if (sizeof($_GET) > 0 && !empty($_GET['location'])) {
         . $_GET['book_price'] . ","
         . $_GET['price_paid'] . ","
         . $purchase_id . ","
-        . $repair_id
+        . $repair_id . ",0"
         . ");");
 
     $size = sizeof($_GET);
-    for ($i = 0; $i < $size - 13; $i++) {
+    for ($i = 0; $i < ($size - 11) / 2; $i++) {
         $rep_str = $_GET["repair_string_" . strval($i)];
         $rep_cost = $_GET["cost_string_" . strval($i)];
         $repair_id = rand(0, 999999999);
@@ -96,6 +96,7 @@ if (sizeof($_GET) > 0 && !empty($_GET['location'])) {
         <li class="menu-item"><a href="../summary/summary.php">Summary</a></li>
         <li class="menu-item"><a href="../inventory/inventory.php">Vehicle Inventory</a></li>
         <li class="menu-item"><a href="../customers/customers.php">Customer Registry</a></li>
+        <li class="menu-item"><a href="../employee/employees.php">Employee</a></li>
         <li class="menu-item"><a href="../warranty/warranties.php">Warranty Registry</a></li>
     </ul>
     <div class="user-logout">

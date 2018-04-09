@@ -8,22 +8,31 @@
 require_once ("../db_query.php");
 
 $success = false;
-$con = new db_query();
-if (!$con->is_connected()) {
-    die("Connection Failed: " . $con->connection->connect_error);
-}
+if (count($_GET) > 0 && key_exists('VehicleID', $_GET)) {
+    $con = new db_query();
+    if (!$con->is_connected()) {
+        die("Connection Failed: " . $con->connection->connect_error);
+    }
 
-$SaleID = rand(0, 999999999);
-$qry = $con->execute_query("INSERT INTO Sale VALUES ("
-    . "$SaleID,"
-    . "'{$_GET['Date']}',"
-    . "'{$_GET['TotalDue']}',"
-    . "'{$_GET['DownPayment']}',"
-    . "'{$_GET['FinanceAmount']}');"
-);
+    $SaleID = rand(0, 999999999);
+    $qry = $con->execute_query("INSERT INTO Sale VALUES ("
+        . "$SaleID,"
+        . "'" . date("Y-m-d") . "',"
+        . "'{$_GET['TotalDue']}',"
+        . "'{$_GET['DownPayment']}',"
+        . "'{$_GET['FinanceAmount']}',"
+        . "'{$_GET['customer_id']}',"
+        . "'{$_GET['EmployeeID']}',"
+        . "'{$_GET['VehicleID']}'"
+        .
+        ");"
+    );
 
-if ($qry) {
-    $success = true;
+    $qry2 = $con->execute_update("UPDATE Vehicle SET Sold=1 WHERE VehicleID={$_GET['VehicleID']}");
+
+    if ($qry && $qry2) {
+        $success = true;
+    }
 }
 ?>
 <head>
@@ -38,8 +47,7 @@ if ($qry) {
         <li class="menu-item"><a href="../summary/summary.php">Summary</a></li>
         <li class="menu-item"><a href="../inventory/inventory.php">Vehicle Inventory</a></li>
         <li class="menu-item"><a href="../customers/customers.php">Customer Registry</a></li>
-        <li class="menu-item"><a href="../employee/employee.php">Employee</a></li>
-        <li class="menu-item"><a href="sale_info.php">Sale</a></li>
+        <li class="menu-item"><a href="../employee/employees.php">Employee</a></li>
         <li class="menu-item"><a href="../warranty/warranties.php">Warranty Registry</a></li>
     </ul>
     <div class="user-logout">
@@ -47,7 +55,7 @@ if ($qry) {
     </div>
 </div>
 <div class="main-title">
-    <h1>Add Vehicles</h1>
+    <h1>Create Sale</h1>
 </div>
 <div class="contents">
     <?php
@@ -55,9 +63,11 @@ if ($qry) {
         echo "Sale Added";
     }
     ?>
-    <form action="add_Sale.php">
-        Date of Birth (YYYY-MM-DD)<br>
-        <input type="text" name="Date"><br>
+    <form action="add_sale.php">
+        Vehicle ID<br>
+        <input type="text" name="VehicleID"><br>
+        Employee ID<br>
+        <input type="text" name="EmployeeID"><br>
         Total Due<br>
         <input type="text" name="TotalDue"><br>
         Down Payment<br>
@@ -65,8 +75,8 @@ if ($qry) {
         Finance Amount<br>
         <input type="text" name="FinanceAmount"><br>
         <br>
+        <input type="hidden" name="customer_id" value="<?php echo $_GET['customer_id'] ?>">
         <input type="submit" value="Submit">
     </form>
 </div>
 </body>
-}

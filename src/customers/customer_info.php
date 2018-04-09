@@ -30,6 +30,7 @@ if (sizeof($_GET) > 0) {
         <li class="menu-item"><a href="../summary/summary.php">Summary</a></li>
         <li class="menu-item"><a href="../inventory/inventory.php">Vehicle Inventory</a></li>
         <li class="menu-item"><a href="../customers/customers.php">Customer Registry</a></li>
+        <li class="menu-item"><a href="../employee/employees.php">Employee</a></li>
         <li class="menu-item"><a href="../warranty/warranties.php">Warranty Registry</a></li>
     </ul>
     <div class="user-logout">
@@ -74,7 +75,8 @@ if (sizeof($_GET) > 0) {
         <?php
         $repairQry = $con->execute_query(
                 "SELECT * FROM Sale AS s, Customer AS c 
-                        WHERE s.CustomerID=c.CustomerID"
+                        WHERE s.CustomerID=c.CustomerID
+                        AND s.CustomerID=$id;"
         );
         while($repRow = $repairQry->fetch_array()) {
             $veh_id = $repRow['VehicleID'];
@@ -84,11 +86,13 @@ if (sizeof($_GET) > 0) {
             print "<th><a href=\"../sales/sale_info.php?id=$sale_id\">" . $repRow['SaleID'] . "</a></th>";
             print "<th><a>" . $repRow['Date'] . "</a></th>";
             print "<th><a>" . $repRow['TotalDue'] . "</a></th>";
-            print "<th><a href=\"../employee/employee_info.php?id=$emp_id\">" . $repRow['EmployeeID'] . "</a></th>";
+            print "<th><a>" . $repRow['EmployeeID'] . "</a></th>";
             print "<th><a href=\"../inventory/vehicle_info.php?id=$veh_id\" >" . $repRow['VehicleID'] . "</a></th>";
             print "<tr>";
         }
         ?>
     </table>
+    <br>
+    <button onclick="location.href='../sales/add_sale.php?customer_id=<?php echo $_GET['id'] ?>'" type="button">Purchase Vehicle</button>
 </div>
 </body>

@@ -30,6 +30,7 @@ if (sizeof($_GET) > 0) {
         <li class="menu-item"><a href="../summary/summary.php">Summary</a></li>
         <li class="menu-item"><a href="../inventory/inventory.php">Vehicle Inventory</a></li>
         <li class="menu-item"><a href="../customers/customers.php">Customer Registry</a></li>
+        <li class="menu-item"><a href="../employee/employees.php">Employee</a></li>
         <li class="menu-item"><a href="../warranty/warranties.php">Warranty Registry</a></li>
     </ul>
     <div class="user-logout">
@@ -54,6 +55,7 @@ if (sizeof($_GET) > 0) {
 
         $date = date('Y', strtotime($row[3]));
         echo "<p>Summary for Vehicle $id</p>";
+        echo "<p>Sold: " . ($row['Sold'] == 0 ? "No" : "Yes") . "</p>";
         echo "<p>Make: $row[1]</p>";
         echo "<p>Model: $row[2]</p>";
         echo "<p>Year: $date</p>";
@@ -77,8 +79,7 @@ if (sizeof($_GET) > 0) {
             <th class="table-heading">Actual Cost</th>
         </tr>
         <?php
-        $repairQry = $con->execute_query("SELECT * FROM Repairs, CarPurchase WHERE Repairs.VehicleID=CarPurchase.VehicleID" .
-            " AND Repairs.VehicleID=$id;");
+        $repairQry = $con->execute_query("SELECT * FROM Repairs WHERE VehicleID=$id;");
         while($repRow = $repairQry->fetch_array()) {
             $cost = $repRow['ActualCost'];
             $repID = $repRow['RepairID'];
@@ -116,5 +117,6 @@ if (sizeof($_GET) > 0) {
         }
         ?>
     </table>
+    <br>
 </div>
 </body>
