@@ -14,7 +14,7 @@ class db_query {
      * db_query constructor.
      */
     public function __construct() {
-        $this->connection = new mysqli("cs3660.paratek.io", "remote", "Mongoose12!", "WESTWADB");
+        $this->connection = new mysqli("localhost", "root", "mongoose1", "WESTWADB");
     }
 
     public function is_connected() {
